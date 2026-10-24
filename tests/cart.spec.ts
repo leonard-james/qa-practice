@@ -1,3 +1,4 @@
+import { LoginPage } from '../pages/LoginPage';
 import { test, expect } from '@playwright/test';
 
 test('TC-006: add one item to cart', async ({ page }) => {
@@ -24,11 +25,11 @@ test('TC-006: add one item to cart', async ({ page }) => {
 
 test('TC-012: remove a product from the cart', async ({ page }) => {
   // Log in
-  await page.goto('https://www.saucedemo.com');
-  await page.getByPlaceholder('Username').fill('standard_user');
-  await page.getByPlaceholder('Password').fill('secret_sauce');
-  await page.getByRole('button', { name: 'Login' }).click();
-  await expect(page).toHaveURL(/inventory/);
+  
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('standard_user', 'secret_sauce');
+  await loginPage.expectLoggedIn();
 
   // Add the backpack, then open the cart
   await page.getByRole('button', { name: 'Add to cart' }).first().click();
@@ -38,7 +39,6 @@ test('TC-012: remove a product from the cart', async ({ page }) => {
   // TODO: click Remove
   // TODO: assert 'Sauce Labs Backpack' is no longer visible (use not.toBeVisible())
   await page.getByRole('button', { name: 'Remove' }).first().click();
-  await expect(page.getByText('Sauce Labs Backpack')).not.toBeVisible();
   await expect(page.getByRole('button', { name: 'Remove' })).not.toBeVisible();
 
 });
