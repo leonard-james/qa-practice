@@ -1,44 +1,38 @@
-import { LoginPage } from '../pages/LoginPage';
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+import { CartPage } from '../pages/CartPage';
 
-test('TC-006: add one item to cart', async ({ page }) => {
-  // Log in
-  await page.goto('https://www.saucedemo.com');
-  await page.getByPlaceholder('Username').fill('standard_user');
-  await page.getByPlaceholder('Password').fill('secret_sauce');
-  await page.getByRole('button', { name: 'Login' }).click();
-  await expect(page).toHaveURL(/inventory/);
+test('TC-006: Add one item to the cart', async ({ page }) => {
+  // Log in 
+  const loginPage = new LoginPage(page);
+  const cartPage = new CartPage(page);
 
-  // Add the backpack (first item in the default A-Z sort)
-  await page.getByRole('button', { name: 'Add to cart' }).first().click();
+  await loginPage.goto();
+  await loginPage.login('standard_user', 'secret_sauce');
+  await loginPage.expectLoggedIn();
 
-  // The button changes to Remove
-  await expect(page.getByRole('button', { name: 'Remove' })).toBeVisible();
+  await cartPage.addFirstItem();
+  await cartPage.open();
+  await cartPage.expectItemVisible('Sauce Labs Backpack');
 
-  // Open the cart
-  await page.getByRole('button', { name: /^Cart/ }).click();
-  await expect(page).toHaveURL(/cart/);
-  await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
-
-  
 });
 
-test('TC-012: remove a product from the cart', async ({ page }) => {
-  // Log in
+test('TC-012: remove an item', async ({ page }) => {
+
+  await page.goto('https://www.saucedemo.com/inventory.html');  
+
   
   const loginPage = new LoginPage(page);
   await loginPage.goto();
   await loginPage.login('standard_user', 'secret_sauce');
   await loginPage.expectLoggedIn();
 
-  // Add the backpack, then open the cart
-  await page.getByRole('button', { name: 'Add to cart' }).first().click();
-  await page.getByRole('button', { name: /^Cart/ }).click();
-  await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
+  const cartPage = new CartPage(page);
+  await cartPage.addFirstItem();
+  await cartPage.open();
+  await cartPage.expectItemVisible('Sauce Labs Backpack');
 
-  // TODO: click Remove
-  // TODO: assert 'Sauce Labs Backpack' is no longer visible (use not.toBeVisible())
-  await page.getByRole('button', { name: 'Remove' }).first().click();
-  await expect(page.getByRole('button', { name: 'Remove' })).not.toBeVisible();
+  await cartPage.removeFirstItem();
+  await cartPage.expectItemNotVisible('Sauce Labs Backpack');
 
 });
