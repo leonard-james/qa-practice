@@ -1,0 +1,15 @@
+$kind: http-request
+description: ""
+url: "   https://jsonplaceholder.typicode.com/posts/1"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "// DELETE\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \  pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 6000

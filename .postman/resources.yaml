@@ -1,0 +1,8 @@
+workspace:
+  id: 9620223e-8723-4070-80e2-5cfe723505d9
+localResources:
+  specs:
+    - ../postman/specs/QA-Practice-API.postman_collection.json/QA-Practice-API.postman_collection.json.json
+resourceNameMappings:
+  specs:
+    - ../postman/specs/QA-Practice-API.postman_collection.json/QA-Practice-API.postman_collection.json.json: QA-Practice-API.postman_collection.json

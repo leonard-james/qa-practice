@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "QA-Practice-API.postman_collection.json",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "https://jsonplaceholder.typicode.com"
+    },
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/posts/1": {
+      "get": {
+        "summary": "GET single post (/posts/1)",
+        "responses": {}
+      },
+      "put": {
+        "summary": "PUT update post",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 1,
+                "title": "Updated title",
+                "body": "Updated body",
+                "userId": 1
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "DELETE post",
+        "responses": {}
+      }
+    },
+    "/posts/9999": {
+      "get": {
+        "summary": "GET post not found (/posts/9999)",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "post": {
+        "summary": "POST create post",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "title": "My first post",
+                "body": "Testing with Postman",
+                "userId": 1
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "GET /posts returns an array of 100 items",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "New Request",
+        "responses": {}
+      }
+    }
+  }
+}

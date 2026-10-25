@@ -1,0 +1,28 @@
+$kind: http-request
+url: "   https://jsonplaceholder.typicode.com/posts/1"
+method: PUT
+body:
+  type: json
+  content: "   {\r
+
+    \     \"id\": 1,\r
+
+    \     \"title\": \"Updated title\",\r
+
+    \     \"body\": \"Updated body\",\r
+
+    \     \"userId\": 1\r
+
+    \   }"
+scripts:
+  - type: afterResponse
+    code: |-
+      // PUT
+      pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("Title was updated", function () {
+        pm.expect(pm.response.json().title).to.eql("Updated title");
+      });
+    language: text/javascript
+order: 5000

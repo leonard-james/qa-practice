@@ -1,0 +1,38 @@
+$kind: http-request
+description: ""
+url: https://jsonplaceholder.typicode.com/posts
+method: POST
+body:
+  type: json
+  content: "   {\r
+
+    \     \"title\": \"My first post\",\r
+
+    \     \"body\": \"Testing with Postman\",\r
+
+    \     \"userId\": 1\r
+
+    \   }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", function () {\r
+
+      \  pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response echoes the data I sent\", function () {\r
+
+      \  const data = pm.response.json();\r
+
+      \  pm.expect(data.title).to.eql(\"My first post\");\r
+
+      \  pm.expect(data.userId).to.eql(1);\r
+
+      \  pm.expect(data).to.have.property(\"id\");\r
+
+      });"
+    language: text/javascript
+order: 4000

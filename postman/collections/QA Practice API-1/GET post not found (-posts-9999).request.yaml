@@ -1,0 +1,19 @@
+$kind: http-request
+name: GET post not found (/posts/9999)
+description: ""
+url: "   https://jsonplaceholder.typicode.com/posts/9999"
+method: GET
+body:
+  type: json
+  content: ""
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 404\", function () {\r
+
+      \  pm.response.to.have.status(404);\r
+
+      });\r
+
+      \r\n"
+    language: text/javascript
+order: 3000

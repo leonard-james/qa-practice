@@ -1,0 +1,17 @@
+$kind: http-request
+name: GET /posts returns an array of 100 items
+description: ""
+url: https://jsonplaceholder.typicode.com/posts
+method: GET
+body:
+  type: json
+  content: ""
+scripts:
+  - type: afterResponse
+    code: "   pm.test(\"Returns 100 posts\", function () {\r
+
+      \     pm.expect(pm.response.json()).to.have.lengthOf(100);\r
+
+      \   });"
+    language: text/javascript
+order: 7000

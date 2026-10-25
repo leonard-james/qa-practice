@@ -1,0 +1,38 @@
+$kind: http-request
+name: GET single post (/posts/1)
+description: ""
+url: "   https://jsonplaceholder.typicode.com/posts/1"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \  pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response time is under 1000ms\", function () {\r
+
+      \  pm.expect(pm.response.responseTime).to.be.below(1000);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Post has the correct data\", function () {\r
+
+      \  const data = pm.response.json();\r
+
+      \  pm.expect(data.id).to.eql(1);\r
+
+      \  pm.expect(data.userId).to.eql(1);\r
+
+      \  pm.expect(data).to.have.property(\"title\");\r
+
+      });\r
+
+      \r\n"
+    language: text/javascript
+order: 2000
