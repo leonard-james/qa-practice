@@ -21,7 +21,6 @@ test('TC-012: remove an item', async ({ page }) => {
 
   await page.goto('https://www.saucedemo.com/inventory.html');  
 
-  
   const loginPage = new LoginPage(page);
   await loginPage.goto();
   await loginPage.login('standard_user', 'secret_sauce');
