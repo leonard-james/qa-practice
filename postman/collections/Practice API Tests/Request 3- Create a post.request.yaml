@@ -1,0 +1,25 @@
+$kind: http-request
+name: "Request 3: Create a post"
+description: ""
+url: https://jsonplaceholder.typicode.com/posts
+method: POST
+body:
+  type: json
+  content: '{ "title": "My first test", "body": "Learning Postman", "userId": 1 }'
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status is 201 Created\", function () {\r
+
+      \  pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response has an id\", function () {\r
+
+      \  pm.expect(pm.response.json()).to.have.property(\"id\");\r
+
+      });"
+    language: text/javascript
+order: 3000
