@@ -1,17 +1,47 @@
 # QA Practice
 
-Automated UI tests for [saucedemo.com](https://www.saucedemo.com) written with Playwright and TypeScript, plus manual test cases and bug reports I wrote while learning QA.
+This repo is where I practice **manual** and **automated** QA. The practice site is [https://socia.ph/](https://socia.ph/). Testing here is light only: viewing pages, clicking links, and trying empty/invalid form inputs. Nothing destructive is submitted.
+
+## Tools
+
+- Manual testing — writing test cases and bug reports by hand
+- [Playwright](https://playwright.dev/) — automated browser tests
 
 ## What's inside
-- `tests/` has Playwright tests for login (TC-001 to TC-003) and cart (TC-006, TC-012)
-- `pages/` has Page Object Model classes (`LoginPage`, `CartPage`)
-- `postman/` has a Postman collection (GET, POST, PUT, DELETE) for the JSONPlaceholder API, with test scripts for status codes and response data
+
+| Area | Description | Link |
+|------|-------------|------|
+| Test cases | Manual test cases for the Socia homepage | [test-cases/socia-homepage.md](test-cases/socia-homepage.md) |
+| Bug reports | Bug report templates and findings | [bug-reports/](bug-reports/) |
+| Automated tests | Playwright tests for the Socia site | [tests/](tests/) |
+| Reports | Exported Playwright reports (e.g. PDFs) | [reports/](reports/) |
 
 ## How to run
-1. Install dependencies: `npm install`
-2. Install browsers: `npx playwright install`
-3. Run the tests: `npx playwright test`
-4. Open the report: `npx playwright show-report`
 
-## Running the API tests
-Open Postman, import the collection from `postman/collections`, then right-click it and choose **Run collection**.
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Install the Playwright browsers:
+
+   ```bash
+   npx playwright install
+   ```
+
+3. Run the automated tests:
+
+   ```bash
+   npx playwright test
+   ```
+
+4. View the HTML report:
+
+   ```bash
+   npx playwright show-report
+   ```
+
+## Note
+
+The site [https://socia.ph/](https://socia.ph/) belongs to someone else. All testing here is for learning only and the results are not official. Be respectful: do not submit destructive actions, do not spam forms, and do not put heavy load on the site.

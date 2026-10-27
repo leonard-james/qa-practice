@@ -1,0 +1,3 @@
+Place exported Playwright reports here, for example PDFs of the HTML report.
+
+This file (.gitkeep) just keeps the folder tracked by git.

@@ -1,8 +1,9 @@
-
-# Playwright
+# Dependencies
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
+
+# Playwright generated output
+playwright-report/
+test-results/
+blob-report/
 /playwright/.cache/
 /playwright/.auth/
