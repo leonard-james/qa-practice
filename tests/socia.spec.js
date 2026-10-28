@@ -1,7 +1,3 @@
-// tests/socia.spec.js
-// Automated Playwright checks for https://socia.ph/
-// Written with ES module syntax. Each test is labelled with the matching
-// manual test case ID from test-cases/socia-homepage.md.
 
 import { test, expect } from '@playwright/test';
 import path from 'node:path';
@@ -15,21 +11,14 @@ const SHOT_DIR = path.resolve(process.cwd(), 'screenshots');
 // TC-002: the title contains "Socia" (full expected title is
 //         "Socia | Custom Business Systems & Automation", but the site
 //         currently returns "Welcome to Socia" — see BUG-001).
-test('page loads and title matches /Socia/', async ({ page }) => {
+test('page loads and title matches exact expected string', async ({ page }) => {
   await page.goto(URL, { waitUntil: 'networkidle' });
-  // The site renders a full-screen white splash (z-9999) for ~2s.
-  // Wait for it to be removed from the DOM before screenshotting.
   await page.waitForSelector('.fixed.inset-0.z-\\[9999\\]', { state: 'detached', timeout: 15000 })
-    .catch(() => {}); // if it's already gone, that's fine
-  // Extra buffer for any remaining animation frames.
+    .catch(() => {});
   await page.waitForTimeout(500);
-  await expect(page).toHaveTitle(/Socia/);
-  // Capture the actual title (BUG-001: site returns "Welcome to Socia"
-  // instead of "Socia | Custom Business Systems & Automation").
-  await page.screenshot({
-    path: path.join(SHOT_DIR, 'BUG-001.png'),
-    fullPage: true,
-  });
+
+  // Asserting exact string will cause this test to FAIL on "Welcome to Socia"
+  await expect(page).toHaveTitle('Socia | Custom Business Systems & Automation');
 });
 
 // TC-001: the body element is visible (content rendered).
